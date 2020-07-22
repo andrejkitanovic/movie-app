@@ -9,9 +9,11 @@ import thunk from "redux-thunk";
 
 import { Provider } from "react-redux";
 import moviesReducor from './store/reducors/movies'
+import moverReducor from './store/reducors/mover'
 
 const rootReducer = combineReducers({
-  movies: moviesReducor
+  movies: moviesReducor,
+  mover:moverReducor
 });
 
 const logger = (store) => {

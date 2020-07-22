@@ -20,8 +20,8 @@ class Genre extends PureComponent {
         `https://api.themoviedb.org/3/discover/movie?with_genres=${this.props.id}&api_key=d38aa8716411ef7d8e9054b34a6678ac`
       )
       .then((response) => {
-        const movies = response.data.results.slice(0, 5);
-        this.setState({ movies: movies ,loading: false});
+        // const movies = response.data.results.slice(0, this.props.rows);
+        this.setState({ movies: response.data.results ,loading: false});
       })
       .catch(error => {console.log(error)})
   }
@@ -40,7 +40,10 @@ class Genre extends PureComponent {
     let movies = null;
     
     if (this.state.movies) {
-      movies = this.state.movies.map((movie) => (
+      let updatedMoives = this.state.movies;
+      updatedMoives = updatedMoives.slice(0,this.props.rows)
+
+      movies = updatedMoives.map((movie) => (
         <Movie key={movie.id} movie={movie} clicked={this.props.selectMovie} back={this.props.back}/>
       ));
     }

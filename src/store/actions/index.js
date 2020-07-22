@@ -1,4 +1,3 @@
-export {
-    selectMovie,
-    cancelMovie
-} from "./movies"
+export * from "./movies"
+
+export * from "./mover"
