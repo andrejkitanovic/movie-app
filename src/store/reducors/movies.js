@@ -26,7 +26,7 @@ const initialState = {
 const reducor = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SELECT_MOVIE:
-      window.scrollTo({top:0,behavior:'smooth'})
+      window.scrollTo({top:0})
       return updateObject(state, { currentMovie: action.movie });
     case actionTypes.CANCEL_MOVIE:
       return updateObject(state, { currentMovie: null });

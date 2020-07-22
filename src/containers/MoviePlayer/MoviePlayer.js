@@ -1,4 +1,4 @@
-import React , { Component} from "react";
+import React, { Component } from "react";
 
 import Aux from "../../hoc/Auxiliry/Auxiliry";
 
@@ -7,83 +7,100 @@ import Genre from "../../components/Genre/Genre";
 
 import { connect } from "react-redux";
 
-import {updateColumns , updateWindowSize} from "../../store/actions/index"
+import {
+  updateWindowSize,
+  updateRows,
+  moveLeft,
+  moveRight,
+  moveTop,
+  moveBottom,
+} from "../../store/actions/index";
 
-class MoviePlayer extends Component{
-
-  // useEffect(() => {
-  //   window.addEventListener('scroll', props.updateWindowSize(document.body.width));
-  // });
-  
-  // useEffect(() => {
-  //   return () => {
-  //     window.removeEventListener('scroll', props.updateWindowSize(document.body.width));
-  //   };
-  // }, []);
-
-  // componentDidMount(){
-  //  document.addEventListener("resize", () => console.log(document.body.clientWidth));
-  // }
-
-  // componentWillUnmount(){
-  //   document.removeEventListener("resize" ,() => console.log(document.body.clientWidth))
-  // }
-
-  componentDidUpdate(){
-    // this.setColumns()
+class MoviePlayer extends Component {
+  componentDidUpdate() {
+    this.setRows();
   }
 
-  componentDidMount(){
-    // this.setColumns()
-    window.addEventListener("resize", () => this.props.updateWindowSize(document.body.clientWidth));
+  componentDidMount() {
+    this.setRows();
+    window.addEventListener("resize", () =>
+      this.props.updateWindowSize(document.body.clientWidth)
+    );
+    window.addEventListener("keydown", this.keyPressHandle);
   }
 
-  handleClick = () => {
-    console.log('a')
+  componentWillUnmount() {
+    window.removeEventListener("resize", () =>
+      this.props.updateWindowSize(document.body.clientWidth)
+    );
+    window.removeEventListener("keydown", this.keyPressHandle);
   }
 
-  setColumns = () => {
-    let numberOfColumns = this.props.genres.length
-    if(this.props.currentMovie){
-      numberOfColumns++;
+  keyPressHandle = (e) => {
+    e.preventDefault();
+    switch (e.key) {
+      // case "Enter":
+      //   this.showMovie();
+      //   break;
+      case "ArrowLeft":
+        this.props.decreaseColumn();
+        break;
+      case "ArrowRight":
+        this.props.increaseColumn();
+        break;
+      case "ArrowUp":
+        this.props.decreaseRow();
+        break;
+      case "ArrowDown":
+        this.props.increaseRow();
+        break;
+      default:
+        break;
     }
-    this.props.updateColumns(numberOfColumns);
-  }
+  };
 
+  setRows = () => {
+    let numberOfRows = this.props.genres.length;
+    if (this.props.currentMovie) {
+      numberOfRows++;
+    }
+    this.props.updateRows(numberOfRows);
+  };
 
-  render(){
+  render() {
     let player = this.props.currentMovie ? (
       <Player movie={this.props.currentMovie} />
     ) : null;
-  
-    let column = 0;
-  
+
+    let row = 0;
+
     let similarMovies = null;
-  
+
     if (this.props.currentMovie) {
-      column++
+      row++;
       similarMovies = (
         <Genre
           id={this.props.currentMovie.genre_ids[1]}
           title={"More like this"}
-          column={column}
-          rows={this.props.rows}
+          row={row}
+          movies={this.props.columns}
         />
       );
     }
-  
+
     let genres = this.props.genres.map((genre) => {
-      column++
-      return <Genre key={genre.id} id={genre.id} title={genre.name} column={column} rows={this.props.rows}/>
-    })
-  
-    this.props.updateColumns(column)
-  
-    // document.addEventListener('resize', () => {
-    //   console.log('a')
-    //   updateWindowSize(document.body.clientWidth)
-    // })
-  
+      row++;
+      return (
+        <Genre
+          key={genre.id}
+          id={genre.id}
+          title={genre.name}
+          row={row}
+          movies={this.props.columns}
+        />
+      );
+    });
+
     return (
       <Aux>
         {player}
@@ -92,8 +109,7 @@ class MoviePlayer extends Component{
       </Aux>
     );
   }
-  
-};
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -102,12 +118,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    updateColumns:(columns) => dispatch(updateColumns(columns)),
-    updateWindowSize:(width) => dispatch(updateWindowSize(width))
-  }
-}
-
+    updateRows: (rows) => dispatch(updateRows(rows)),
+    updateWindowSize: (width) => dispatch(updateWindowSize(width)),
+    decreaseColumn: () => dispatch(moveLeft()),
+    increaseColumn: () => dispatch(moveRight()),
+    decreaseRow: () => dispatch(moveTop()),
+    increaseRow: () => dispatch(moveBottom()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePlayer);

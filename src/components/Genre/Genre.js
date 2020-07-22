@@ -7,6 +7,8 @@ import axios from "axios";
 import Category from "../Icons/Category";
 import Spinner from "../UI/Spinner/Spinner"
 
+import { connect } from "react-redux";
+
 class Genre extends PureComponent {
   state = {
     movies: [],
@@ -36,16 +38,25 @@ class Genre extends PureComponent {
     this.loadMovies()
   }
 
+  activeClass(column){
+      if(this.props.row === this.props.mover.row && column === this.props.mover.column){
+        return true
+      }
+      return false
+  }
+
   render() {
+
     let movies = null;
     
     if (this.state.movies) {
       let updatedMoives = this.state.movies;
-      updatedMoives = updatedMoives.slice(0,this.props.rows)
-
-      movies = updatedMoives.map((movie) => (
-        <Movie key={movie.id} movie={movie} clicked={this.props.selectMovie} back={this.props.back}/>
-      ));
+      updatedMoives = updatedMoives.slice(0,this.props.movies)
+      let counter = 0;
+      movies = updatedMoives.map((movie) => {
+        counter++
+        return <Movie key={movie.id} movie={movie} clicked={this.props.selectMovie} back={this.props.back} active={this.activeClass(counter)}/>
+      });
     }
 
     if(this.state.loading){
@@ -64,4 +75,11 @@ class Genre extends PureComponent {
   }
 }
 
-export default Genre;
+const mapStateToProps = (state) => {
+  return {
+    ...state.mover
+  };
+};
+
+
+export default connect(mapStateToProps, null)(Genre);
