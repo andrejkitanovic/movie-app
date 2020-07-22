@@ -1,0 +1,6 @@
+.Player{
+    position: relative;
+    height: 80vh;
+    box-sizing: border-box;
+    min-height: 600px;
+}

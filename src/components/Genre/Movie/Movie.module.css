@@ -1,0 +1,20 @@
+.Movie {
+    border: 5px solid transparent;
+    transition:.2s;
+    padding-right: 15px;
+    width: 240px;
+}
+
+.Movie img{
+    display:inline-block;
+    width: 240px;
+    border-radius: 15px;
+}
+
+.Movie h3{
+    font-size: 15px;
+}
+
+.Movie:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,15 @@
+.Info {
+    display: flex;
+}
+
+.Info .Star{
+    color:#F0AB03;
+}
+
+.Info span svg{
+    margin-right: 5px;
+}
+
+.Info span{
+    margin-right: 12px;
+}

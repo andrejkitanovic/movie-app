@@ -1,0 +1,154 @@
+.Controls{
+    position: absolute;
+    left:5%;
+    top:0;
+    height: 100%;
+    width: 90%;
+    z-index: 20;
+    box-sizing: border-box;
+}
+
+.Controls h3{
+    position: absolute;
+    bottom:70%;
+    left:10%;
+    padding:0;
+    font-size: 40px;
+}
+
+.Controls p{
+    position: absolute;
+    top:32%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 20px;
+    color:rgba(255,255,255,0.6);
+}
+
+.Controls svg {
+    transform: scale(1.5);
+}
+
+.Controls .Back svg{
+    position: absolute;
+    top:5%;
+    left:0;
+    cursor: pointer;
+}
+
+.Controls .Star{
+    position: absolute;
+    top:27%;
+    left:13%;
+    color:#F0AB03;
+    font-weight: bold;
+    display: flex;
+}
+
+.Controls .Star svg{
+    margin-top: 4px;
+    margin-right: 15px;
+}
+
+.Controls .Play {
+    position: absolute;
+    bottom: 12%;
+    left:10%;
+}
+
+.Controls .Play svg{
+    padding:0;
+    cursor: pointer;
+}
+
+.Controls .Loader{
+    position: absolute;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    bottom: 20%;
+    margin-left: 10%;
+}
+
+.Controls .Loader p{
+    position: relative;
+    font-size: 25px;
+    margin:0;
+}
+
+.Controls .Time{
+    position: relative;
+    width: 80%;
+    overflow:hidden;
+    border-radius: 20px;
+   
+}
+
+.Time input {
+    height: 0;
+    -webkit-appearance: none;
+    background-color: #F0AB03;
+    width: 100%;
+}
+
+.Time input::-webkit-slider-runnable-track {
+    height: 10px;
+    background-color: rgba(255,255,255,0.6);
+    border: none;
+    border-radius: 3px;    
+}
+
+.Time input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #F0AB03;
+    margin-top: -4px;
+    z-index: 10;
+    transition: .5s;
+}
+
+.Time input:hover::-webkit-slider-thumb {
+    transform: scale(1.5);
+}
+
+.Time input:focus {
+    outline: none;
+}
+
+.Played{
+    position: absolute;
+    background-color: #F0AB03;
+    height: 10px;
+    bottom: 11px;
+    left:2px;
+    z-index: 1;
+    pointer-events: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+@media (max-width:850px){
+    .Controls{
+        width: 100%;
+        left: 0;
+    }
+
+    .Controls p{
+        font-size: 15px;
+    }
+
+    .Time {
+        width: 60%!important;
+    }
+
+    .Back svg{
+        left:5%!important;
+    }
+    
+    .Controls h3{
+        font-size: 28px;
+    }
+}

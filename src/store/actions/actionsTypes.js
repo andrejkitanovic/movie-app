@@ -1,0 +1,2 @@
+export const SELECT_MOVIE = "SELECT_MOVIE"
+export const CANCEL_MOVIE = "CANCEL_MOVIE"

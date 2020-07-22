@@ -1,0 +1,21 @@
+.Genre {
+    margin-left: 15%;
+    font-family: 'Open Sans';
+    position: relative;
+    margin-bottom: 2%;
+    height: 550px;
+}
+
+.Genre svg{
+    margin-right: 10px;
+}
+
+.Genre h2{
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.Genre .MovieContainer{
+    display:flex;
+}
