@@ -43,4 +43,4 @@ const back = () => (
   </svg>
 );
 
-export default back;
+export default React.memo(back);

@@ -18,14 +18,13 @@ const reducor = (state = initialState, action) => {
     case actionTypes.UPDATE_ROWS:
       return updateObject(state, { rows: action.rows });
     case actionTypes.UPDATE_WINDOWSIZE:
-      const columns = Math.floor(action.width / 300)
+      const columns = Math.floor(action.width / 300);
       if (state.mover.column > columns) {
         return updateObject(state, {
           columns: columns,
-          mover: { ...state.mover, column: columns},
+          mover: { ...state.mover, column: columns },
         });
-      } else
-        return updateObject(state, { columns: columns });
+      } else return updateObject(state, { columns: columns });
     case actionTypes.MOVE_LEFT:
       if (state.mover.column - 1 > 0) {
         return updateObject(state, {
@@ -39,6 +38,12 @@ const reducor = (state = initialState, action) => {
         });
       } else return state;
     case actionTypes.MOVE_TOP:
+      if (state.mover.row - 1 === 0 && action.movie) {
+        return updateObject(state, {
+          hoveredMovie: null,
+          mover: { ...state.mover, row: state.mover.row - 1 },
+        });
+      }
       if (state.mover.row - 1 > 0) {
         return updateObject(state, {
           mover: { ...state.mover, row: state.mover.row - 1 },
@@ -54,7 +59,14 @@ const reducor = (state = initialState, action) => {
       return updateObject(state, {
         hoveredMovie: null,
         mover: {
-          row:0,
+          row: 0,
+          column: 1,
+        },
+      });
+    case actionTypes.BEGGING_MOVER:
+      return updateObject(state, {
+        mover: {
+          row: 1,
           column: 1,
         },
       });

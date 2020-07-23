@@ -49,7 +49,6 @@ class MoviePlayer extends Component {
           this.props.resetMover();
           this.props.selectedMovie(movie);
         }
-
         break;
       case "ArrowLeft":
         e.preventDefault();
@@ -61,7 +60,10 @@ class MoviePlayer extends Component {
         break;
       case "ArrowUp":
         e.preventDefault();
-        this.props.decreaseRow();
+        this.props.decreaseRow(this.props.currentMovie ? true : false);
+        if(this.props.mover.row === 0){
+          window.scrollTo({top:0 , behavior: "smooth"})
+        }
         break;
       case "ArrowDown":
         e.preventDefault();
@@ -137,7 +139,7 @@ const mapDispatchToProps = (dispatch) => {
     updateWindowSize: (width) => dispatch(updateWindowSize(width)),
     decreaseColumn: () => dispatch(moveLeft()),
     increaseColumn: () => dispatch(moveRight()),
-    decreaseRow: () => dispatch(moveTop()),
+    decreaseRow: (boolean) => dispatch(moveTop(boolean)),
     increaseRow: () => dispatch(moveBottom()),
     selectedMovie: (movie) => dispatch(selectMovie(movie)),
     resetMover: () => dispatch(resetMover()),

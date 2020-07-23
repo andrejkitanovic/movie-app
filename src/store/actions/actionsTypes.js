@@ -11,3 +11,4 @@ export const MOVE_TOP = "MOVE_TOP"
 export const MOVE_BOTTOM = "MOVE_BOTTOM"
 
 export const RESET_MOVER = "RESET_MOVER"
+export const BEGGING_MOVER = "BEGGING_MOVER"

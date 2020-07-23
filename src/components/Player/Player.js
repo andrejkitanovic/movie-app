@@ -6,7 +6,7 @@ import classes from "./Player.module.css";
 import Overlay from "../UI/Overlay/Overlay";
 import PlayerControls from "./PlayerControls/PlayerControls";
 
-import { cancelMovie } from "../../store/actions/index";
+import { cancelMovie, beggingMover } from "../../store/actions/index";
 import { connect } from "react-redux";
 
 class Player extends PureComponent {
@@ -52,6 +52,9 @@ class Player extends PureComponent {
         case "ArrowRight":
           this.player.seekTo(parseFloat(played + 0.05));
           break;
+        case "Escape":
+          this.backHandler();
+          break;
         default:
           break;
       }
@@ -91,6 +94,11 @@ class Player extends PureComponent {
     this.player = player;
   };
 
+  backHandler = () => {
+    this.props.cancelMovie();
+    this.props.beggingMover();
+  };
+
   render() {
     let playerControls =
       this.state.inactive < 3 ? (
@@ -99,7 +107,7 @@ class Player extends PureComponent {
           currentTime={this.state.playedSeconds}
           duration={this.state.duration}
           movie={this.props.movie}
-          back={this.props.cancelMovie}
+          back={this.backHandler}
           play={this.playToggleHandler}
           played={this.state.played}
           handleSeekChange={this.handleSeekChange}
@@ -135,6 +143,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     cancelMovie: () => dispatch(cancelMovie()),
+    beggingMover: () => dispatch(beggingMover()),
   };
 };
 

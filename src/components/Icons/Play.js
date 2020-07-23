@@ -14,4 +14,4 @@ const play = () => (<svg width={20} height={22} viewBox="0 0 20 22" fill="none" 
 </defs>
 </svg>)
 
-export default play
+export default React.memo(play)

@@ -14,4 +14,4 @@ const category = () => ( <svg width={23} height={22} viewBox="0 0 23 22" fill="n
 </defs>
 </svg>)
 
-  export default category
+  export default React.memo(category)

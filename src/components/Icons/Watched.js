@@ -6,4 +6,4 @@ const watched = () => (
       </svg>
 );
 
-export default watched;
+export default React.memo(watched);

@@ -33,9 +33,10 @@ export const moveRight = () => {
     }
 }
 
-export const moveTop = () => {
+export const moveTop = (movie) => {
     return {
-        type: actionTypes.MOVE_TOP
+        type: actionTypes.MOVE_TOP,
+        movie:movie
     }
 }
 
@@ -48,5 +49,11 @@ export const moveBottom = () => {
 export const resetMover = () => {
   return {
     type: actionTypes.RESET_MOVER
+  }
+}
+
+export const beggingMover = () => {
+  return {
+    type: actionTypes.BEGGING_MOVER
   }
 }

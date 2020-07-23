@@ -6,4 +6,4 @@ const star = () => (
       </svg>
 );
 
-export default star;
+export default React.memo(star);
