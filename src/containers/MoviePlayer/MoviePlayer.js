@@ -5,6 +5,8 @@ import Aux from "../../hoc/Auxiliry/Auxiliry";
 import Player from "../../components/Player/Player";
 import Genre from "../../components/Genre/Genre";
 
+import Video2 from "../../assets/trailer2.mp4";
+
 import { connect } from "react-redux";
 
 import {
@@ -80,7 +82,7 @@ class MoviePlayer extends Component {
 
   render() {
     let player = this.props.currentMovie ? (
-      <Player movie={this.props.currentMovie} />
+      <Player movie={this.props.currentMovie} url={Video2}/>
     ) : null;
 
     let row = 0;

@@ -1,16 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ReactPlayer from "react-player";
 
 import classes from "./Player.module.css";
 
-import Video from "../../assets/trailer2.mp4";
 import Overlay from "../UI/Overlay/Overlay";
 import PlayerControls from "./PlayerControls/PlayerControls";
 
 import { cancelMovie } from "../../store/actions/index";
 import { connect } from "react-redux";
 
-class Player extends Component {
+class Player extends PureComponent {
   state = {
     playing: false,
     duration: 0,
@@ -24,9 +23,12 @@ class Player extends Component {
 
   componentDidMount() {
     this.interval = setInterval(() => {
-      const time = this.state.inactive;
-      return this.setState({ inactive: time + 1 });
+      if (this.state.inactive < 4) {
+        const time = this.state.inactive;
+        return this.setState({ inactive: time + 1 });
+      }
     }, 1000);
+
     document.addEventListener("mousemove", this.resetInactivity);
     document.addEventListener("keydown", this.keyPressHandle);
   }
@@ -38,17 +40,23 @@ class Player extends Component {
   }
 
   keyPressHandle = (e) => {
-    switch (e.key) {
-      case "Enter":
-        if(this.props.mover.row === 0){
-          this.playToggleHandler()
-          this.resetInactivity()
-        }
-       
-        break;
-      default:
-        break;
+    if (this.props.mover.row === 0) {
+      const played = this.state.played;
+      switch (e.key) {
+        case "Enter":
+          this.playToggleHandler();
+          break;
+        case "ArrowLeft":
+          this.player.seekTo(parseFloat(played - 0.05));
+          break;
+        case "ArrowRight":
+          this.player.seekTo(parseFloat(played + 0.05));
+          break;
+        default:
+          break;
+      }
     }
+    this.resetInactivity();
   };
 
   playToggleHandler = () => {
@@ -105,8 +113,8 @@ class Player extends Component {
         <ReactPlayer
           ref={this.ref}
           width="100%"
-          height="90vh"
-          url={Video}
+          height="85vh"
+          url={this.props.url}
           playing={this.state.playing}
           onProgress={this.handleProgress}
           onDuration={this.handleDuration}
@@ -120,7 +128,7 @@ class Player extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.mover
+    ...state.mover,
   };
 };
 
