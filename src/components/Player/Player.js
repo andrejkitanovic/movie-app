@@ -23,7 +23,7 @@ class Player extends PureComponent {
 
   componentDidMount() {
     this.interval = setInterval(() => {
-      if (this.state.inactive < 4) {
+      if (this.state.inactive < 3) {
         const time = this.state.inactive;
         return this.setState({ inactive: time + 1 });
       }
@@ -93,7 +93,7 @@ class Player extends PureComponent {
 
   render() {
     let playerControls =
-      this.state.inactive < 4 ? (
+      this.state.inactive < 3 ? (
         <PlayerControls
           loaded={this.state.loadedSeconds}
           currentTime={this.state.playedSeconds}
@@ -119,7 +119,7 @@ class Player extends PureComponent {
           onProgress={this.handleProgress}
           onDuration={this.handleDuration}
         />
-        <Overlay show={this.state.inactive < 4} />
+        <Overlay show={this.state.inactive < 3} />
         {playerControls}
       </div>
     );

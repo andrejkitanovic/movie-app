@@ -137,11 +137,12 @@
     }
 
     .Controls p{
-        font-size: 15px;
+        /* font-size: 15px; */
+       visibility: hidden;
     }
 
     .Time {
-        width: 60%!important;
+        width: 100%!important;
     }
 
     .Back svg{
