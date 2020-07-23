@@ -34,7 +34,7 @@ const playerControls = (props) => {
   };
 
   return (
-    <div className={classes.Controls}>
+    <div className={classes.Controls} onClick={props.play}>
       <span className={classes.Back} onClick={props.back}>
         <Back />
       </span>
