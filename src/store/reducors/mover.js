@@ -18,13 +18,14 @@ const reducor = (state = initialState, action) => {
     case actionTypes.UPDATE_ROWS:
       return updateObject(state, { rows: action.rows });
     case actionTypes.UPDATE_WINDOWSIZE:
-      if (state.mover.column > Math.floor(action.width / 300)) {
+      const columns = Math.floor(action.width / 300)
+      if (state.mover.column > columns) {
         return updateObject(state, {
-          columns: Math.floor(action.width / 300),
-          mover: { ...state.mover, column: state.mover.column - 1 },
+          columns: columns,
+          mover: { ...state.mover, column: columns},
         });
       } else
-        return updateObject(state, { columns: Math.floor(action.width / 300) });
+        return updateObject(state, { columns: columns });
     case actionTypes.MOVE_LEFT:
       if (state.mover.column - 1 > 0) {
         return updateObject(state, {
@@ -51,8 +52,9 @@ const reducor = (state = initialState, action) => {
       } else return state;
     case actionTypes.RESET_MOVER:
       return updateObject(state, {
+        hoveredMovie: null,
         mover: {
-          row: 1,
+          row:0,
           column: 1,
         },
       });

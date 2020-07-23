@@ -37,21 +37,25 @@ class MoviePlayer extends Component {
   }
 
   keyPressHandle = (e) => {
-    e.preventDefault();
+  
     switch (e.key) {
       // case "Enter":
       //   this.showMovie();
       //   break;
       case "ArrowLeft":
+        e.preventDefault();
         this.props.decreaseColumn();
         break;
       case "ArrowRight":
+        e.preventDefault();
         this.props.increaseColumn();
         break;
       case "ArrowUp":
+        e.preventDefault();
         this.props.decreaseRow();
         break;
       case "ArrowDown":
+        e.preventDefault();
         this.props.increaseRow();
         break;
       default:
