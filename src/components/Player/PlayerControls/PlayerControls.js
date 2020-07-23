@@ -9,7 +9,7 @@ import Play from "../../Icons/Play";
 const playerControls = (props) => {
   let roundToTime = (seconds) => {
     if (seconds) {
-      let secondsUpdated = Math.floor(seconds);
+      let secondsUpdated = Math.ceil(seconds);
       let minutes = Math.floor(secondsUpdated / 60);
       secondsUpdated = secondsUpdated % 60;
 

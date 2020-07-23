@@ -5,8 +5,6 @@ import Info from "./MovieInfo/MovieInfo";
 import { connect } from "react-redux";
 import { selectMovie, hoveredMovie , resetMover} from "../../../store/actions/index";
 
-// import ReactDOM from 'react-dom';
-
 
 class Movie extends Component {
 
@@ -19,17 +17,10 @@ class Movie extends Component {
     if(this.props.active){
       this.props.hoveredMovie(this.props.movie)
 
-      // var n = ReactDOM.findDOMNode(this);
-      // console.log(n.getBoundingClientRect().top);
       let top = this.ref.current.getBoundingClientRect();
       let body = document.body.getBoundingClientRect();
-      // console.log(document.body.getBoundingClientRect())
-      // console.log(top);
 
-      console.log(top.y)
-      console.log(body.y)
-
-      let scrollTop = top.y + Math.abs(body.y) - 80;
+      let scrollTop = top.y + Math.abs(body.y) - 100;
       window.scrollTo({top:scrollTop , behavior: "smooth"})
     }
   }
@@ -37,10 +28,7 @@ class Movie extends Component {
   componentDidMount(){
     if(this.props.active){
       this.props.hoveredMovie(this.props.movie)
-      
-   
     }
-
   }
 
   selectMovie = () => {

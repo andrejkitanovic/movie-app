@@ -28,12 +28,28 @@ class Player extends Component {
       return this.setState({ inactive: time + 1 });
     }, 1000);
     document.addEventListener("mousemove", this.resetInactivity);
+    document.addEventListener("keydown", this.keyPressHandle);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
     document.removeEventListener("mousemove", this.resetInactivity);
+    document.removeEventListener("keydown", this.keyPressHandle);
   }
+
+  keyPressHandle = (e) => {
+    switch (e.key) {
+      case "Enter":
+        if(this.props.mover.row === 0){
+          this.playToggleHandler()
+          this.resetInactivity()
+        }
+       
+        break;
+      default:
+        break;
+    }
+  };
 
   playToggleHandler = () => {
     const current = this.state.playing;
@@ -101,10 +117,17 @@ class Player extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    ...state.mover
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     cancelMovie: () => dispatch(cancelMovie()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

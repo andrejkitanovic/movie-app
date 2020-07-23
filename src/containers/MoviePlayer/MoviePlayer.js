@@ -14,6 +14,8 @@ import {
   moveRight,
   moveTop,
   moveBottom,
+  selectMovie,
+  resetMover,
 } from "../../store/actions/index";
 
 class MoviePlayer extends Component {
@@ -37,11 +39,16 @@ class MoviePlayer extends Component {
   }
 
   keyPressHandle = (e) => {
-  
     switch (e.key) {
-      // case "Enter":
-      //   this.showMovie();
-      //   break;
+      case "Enter":
+        if (this.props.hoveredMovie) {
+          e.preventDefault();
+          let movie = this.props.hoveredMovie;
+          this.props.resetMover();
+          this.props.selectedMovie(movie);
+        }
+
+        break;
       case "ArrowLeft":
         e.preventDefault();
         this.props.decreaseColumn();
@@ -130,6 +137,8 @@ const mapDispatchToProps = (dispatch) => {
     increaseColumn: () => dispatch(moveRight()),
     decreaseRow: () => dispatch(moveTop()),
     increaseRow: () => dispatch(moveBottom()),
+    selectedMovie: (movie) => dispatch(selectMovie(movie)),
+    resetMover: () => dispatch(resetMover()),
   };
 };
 
